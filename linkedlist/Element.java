@@ -1,26 +1,26 @@
 package linkedlist;
 
-public class Element {
-    private String value;
-    private Element next;
+public class Element<T> {
+    private T value;
+    private Element<T> next;
 
-    public Element(String new_value) {
+    public Element(T new_value) {
         this.value = new_value;
     }
 
-    public String getValue() {
+    public T getValue() {
         return this.value;
     }
 
-    public Element getNext() {
+    public Element<T> getNext() {
         return this.next;
     }
 
-    public void setValue(String v) {
+    public void setValue(T v) {
         this.value = v;
     }
 
-    public void setNext(Element n) {
+    public void setNext(Element<T> n) {
         this.next = n;
     }
 }

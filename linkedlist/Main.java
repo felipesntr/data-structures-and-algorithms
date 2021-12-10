@@ -2,7 +2,7 @@ package linkedlist;
 
 public class Main {
 	public static void main(String[] args) {
-		LinkedList list = new LinkedList();
+		LinkedList<String> list = new LinkedList<String>();
 		list.add("AC");
 		list.add("SE");
 		list.add("BA");

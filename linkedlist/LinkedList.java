@@ -1,19 +1,19 @@
 package linkedlist;
 
-public class LinkedList {
-	private Element first;
-	private Element last;
+public class LinkedList<T> {
+	private Element<T> first;
+	private Element<T> last;
 	private int size;
 
 	public LinkedList() {
 		this.size = 0;
 	}
 
-	public Element getFirst() {
+	public Element<T> getFirst() {
 		return this.first;
 	}
 
-	public Element getLast() {
+	public Element<T> getLast() {
 		return this.last;
 	}
 
@@ -21,11 +21,11 @@ public class LinkedList {
 		return this.size;
 	}
 
-	public void setFirst(Element f) {
+	public void setFirst(Element<T> f) {
 		this.first = f;
 	}
 
-	public void setLast(Element l) {
+	public void setLast(Element<T> l) {
 		this.last = l;
 	}
 
@@ -33,8 +33,8 @@ public class LinkedList {
 		this.size = s;
 	}
 
-	public void add(String new_value) {
-		Element newElement = new Element(new_value);
+	public void add(T new_value) {
+		Element<T> newElement = new Element<T>(new_value);
 		if (this.first == null && this.last == null) {
 			this.first = newElement;
 			this.last = newElement;
@@ -45,11 +45,11 @@ public class LinkedList {
 		this.size++;
 	}
 
-	public void remove(String searching) {
-		Element previous = null;
-		Element current = this.first;
+	public void remove(T searching) {
+		Element<T> previous = null;
+		Element<T> current = this.first;
 		for (int i = 0; i < this.getSize(); i++) {
-			if (current.getValue().equalsIgnoreCase(searching)) {
+			if (current.getValue().equals(searching)) {
 				if (this.getSize() == 1) {
 					this.first = null;
 					this.last = null;
@@ -71,8 +71,8 @@ public class LinkedList {
 		}
 	}
 
-	public Element get(int pos) {
-		Element current = this.first;
+	public Element<T> get(int pos) {
+		Element<T> current = this.first;
 		for (int i = 0; i < pos; i++) {
 			if (current.getNext() != null) {
 				current = current.getNext();
