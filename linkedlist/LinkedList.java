@@ -80,4 +80,8 @@ public class LinkedList<T> {
 		}
 		return current;
 	}
+
+	public IteratorLinkedList<T> getIterator() {
+		return new IteratorLinkedList<T>(this.first);
+	}
 }
