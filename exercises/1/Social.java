@@ -164,40 +164,38 @@ public class Social {
     public static void main(String[] args) throws IOException {
         File input = new File(args[0]);
         File output_file = new File(args[1]);
-        StringBuilder commands = new StringBuilder();
         StringBuilder output = new StringBuilder();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(input))) {
-            String st;
-            while ((st = br.readLine()) != null)
-                commands = commands.append(st).append("\n");
-        }
+        BufferedReader br = new BufferedReader(new FileReader(input));
+        String line;
 
         Users users = new Users();
 
-        for (String command : commands.toString().split("\n")) {
-            String[] commandSplit = command.split(" ", 2);
-            String commandName = commandSplit[0];
+        while ((line = br.readLine()) != null) {
+            String[] commands = line.split(" ", 2);
 
-            switch (commandName) {
+            String command = commands[0];
+            String name = commands[1].trim();
+
+            switch (command) {
                 case "ADD":
-                    String o_add = users.add(new User(commandSplit[1].trim()));
+                    String o_add = users.add(new User(name));
                     if (o_add.equals("User already exists"))
-                        output.append("[ERROR] ADD " + commandSplit[1].trim()).append("\n");
+                        output.append("[ERROR] ADD " + name).append("\n");
                     else
-                        output.append("[ OK  ] ADD " + commandSplit[1].trim()).append("\n");
+                        output.append("[ OK  ] ADD " + name).append("\n");
                     break;
                 case "REMOVE":
-                    String o_remove = users.remove(commandSplit[1].trim());
+                    String o_remove = users.remove(name);
                     if (o_remove.equals("User not found."))
-                        output.append("[ERROR] " + "REMOVE " + commandSplit[1].trim()).append("\n");
+                        output.append("[ERROR] " + "REMOVE " + name).append("\n");
                     else
-                        output.append("[ OK  ] " + "REMOVE " + commandSplit[1].trim()).append("\n");
+                        output.append("[ OK  ] " + "REMOVE " + name).append("\n");
                     break;
                 case "SHOW":
-                    String o_show = users.find(commandSplit[1].trim());
+                    String o_show = users.find(name);
                     if (o_show.equals("User not found."))
-                        output.append("[ERROR] " + "?<-" + commandSplit[1].trim() + "->?")
+                        output.append("[ERROR] " + "?<-" + name + "->?")
                                 .append("\n");
                     else
                         output.append("[ OK  ] " + o_show + "\n");
@@ -205,7 +203,10 @@ public class Social {
                 default:
                     throw new Error("Invalid command.");
             }
+
         }
+
+        br.close();
 
         try {
             FileWriter fw = new FileWriter(output_file);
@@ -214,7 +215,5 @@ public class Social {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println(output);
     }
 }
